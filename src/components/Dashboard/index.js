@@ -21,10 +21,18 @@ const Dashboard = () => {
               </div>
               <div className='col-4'>
                 <Link
-                  to={'/boilers'}
+                  to={'/products'}
                   className='btn btn-danger nuevo-post d-block d-md-inline-block'
                 >
-                  Lista de Calderas
+                  Lista de Productos
+                </Link>
+              </div>
+              <div className='col-4'>
+                <Link
+                  to={'/Suppliers'}
+                  className='btn btn-danger nuevo-post d-block d-md-inline-block'
+                >
+                  Lista de Proveedores
                 </Link>
               </div>
             </div>
