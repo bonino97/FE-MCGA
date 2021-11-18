@@ -1,5 +1,5 @@
 import Swal from 'sweetalert2';
-import client from '../../config/axios';
+import axiosClient from '../../config/axios';
 import {
   ADD_CLIENT,
   ADD_CLIENT_SUCCESS,
@@ -23,16 +23,12 @@ export function addNewClientAction(client) {
     dispatch(addNewClient());
     try {
       // Primero intenta cargar un cliente. Cargando = True.
-      await client.post(`${clientUrl}`, client);
+      await axiosClient.post(`${clientUrl}`, client);
       // Si lo agrega correctamente, dispara la accion con el objeto de cliente cargado correctamente.
       dispatch(addNewClientSuccess(client));
 
       // Alerta exitosa.
-      Swal.fire(
-        'Correcto',
-        'El cliente se agrego correctamente...',
-        'success'
-      );
+      Swal.fire('Correcto', 'El cliente se agrego correctamente...', 'success');
     } catch (error) {
       console.error(error);
       // Si falla, envia una notificacion de error.
@@ -68,7 +64,7 @@ export function getAllClientsAction() {
   return async (dispatch) => {
     dispatch(getAllClients());
     try {
-      const { data } = await client.get(`${clientUrl}/all`);
+      const { data } = await axiosClient.get(`${clientUrl}/all`);
       dispatch(getAllClientsSuccess(data));
     } catch (error) {
       console.error(error);
@@ -96,7 +92,7 @@ export const deleteClientAction = (id) => {
   return async (dispatch) => {
     dispatch(deleteClient());
     try {
-      await client.delete(`${clientUrl}/${id}`);
+      await axiosClient.delete(`${clientUrl}/${id}`);
       dispatch(deleteClientSuccess(id));
       Swal.fire(
         'Eliminado',

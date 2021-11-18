@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const client = axios.create({
-    baseURL: 'http://localhost:3000/api'
+const axiosClient = axios.create({
+    baseURL: 'https://dbmarket.herokuapp.com/api'
 }) 
 
-export default client;
+export default axiosClient;
