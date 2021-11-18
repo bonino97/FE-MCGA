@@ -14,7 +14,6 @@ import Clients from './components/Clients';
 import NewClient from './components/Clients/NewClient';
 import EditClient from './components/Clients/EditClient';
 // Components - Users branch
-import Users from './components/Users';
 // Components - Boilers branch
 //
 
@@ -31,7 +30,6 @@ function App() {
               <Route exact path='/clients' component={Clients} />
               <Route exact path='/clients/new' component={NewClient} />
               <Route exact path='/clients/edit/:id' component={EditClient} />
-              <Route exact path='/users' component={Users} />
             </Switch>
           </div>
         </div>

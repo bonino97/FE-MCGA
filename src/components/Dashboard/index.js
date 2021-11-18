@@ -21,14 +21,6 @@ const Dashboard = () => {
               </div>
               <div className='col-4'>
                 <Link
-                  to={'/users'}
-                  className='btn btn-danger nuevo-post d-block d-md-inline-block'
-                >
-                  Lista de Usuarios
-                </Link>
-              </div>
-              <div className='col-4'>
-                <Link
                   to={'/boilers'}
                   className='btn btn-danger nuevo-post d-block d-md-inline-block'
                 >
