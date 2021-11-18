@@ -9,6 +9,7 @@ import store from './store';
 import Header from './shared/Header';
 import Sidebar from './shared/Sidebar';
 import Dashboard from './components/Dashboard';
+import Footer from './shared/Footer';
 // Components - Clients branch
 import Clients from './components/Clients';
 import NewClient from './components/Clients/NewClient';
