@@ -6,9 +6,10 @@ import { addNewClientAction } from '../../../store/actions/clientsActions';
 const NewClient = ({ history }) => {
   // useState Se utiliza para setear los valores en los campos del formulario.
   const [name, setName] = useState('');
-  const [address, setAddress] = useState('');
-  const [category, setCategory] = useState('');
-  const [description, setDescription] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+
   // Permite utilziar los dispatch.
   const dispatch = useDispatch();
 
@@ -21,16 +22,21 @@ const NewClient = ({ history }) => {
   const onSubmit = (e) => {
     e.preventDefault();
     //Validar formulario.
-    if (name.trim() === '' || address.trim() === '' || category.trim() === '')
+    if (
+      name.trim() === '' ||
+      lastName.trim() === '' ||
+      email.trim() === '' ||
+      phone.trim() === ''
+    )
       return;
 
     //Si no hay errores.
     //Crear Cliente.
     const client = {
       name,
-      address,
-      category,
-      description,
+      lastName,
+      email,
+      phone,
     };
 
     addNewClient(client);
@@ -65,42 +71,44 @@ const NewClient = ({ history }) => {
 
               <div className='form-group'>
                 <label>
-                  Direccion Cliente <span className='text-danger'>*</span>
+                  Apellido Cliente <span className='text-danger'>*</span>
                 </label>
                 <input
                   type='text'
                   className='form-control'
-                  placeholder='Direccion del Cliente'
-                  name='address'
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
+                  placeholder='Apellido del Cliente'
+                  name='lastName'
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </div>
 
               <div className='form-group'>
                 <label>
-                  Categoria Cliente <span className='text-danger'>*</span>
+                  Email Cliente <span className='text-danger'>*</span>
                 </label>
                 <input
                   type='text'
                   className='form-control'
-                  placeholder='Categoria del Cliente'
-                  name='category'
-                  value={category}
-                  onChange={(e) => setCategory(e.target.value)}
+                  placeholder='Email del Cliente'
+                  name='email'
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
               <div className='form-group'>
-                <label>Descripcion Cliente</label>
-                <textarea
+                <label>
+                  Telefono Cliente <span className='text-danger'>*</span>
+                </label>
+                <input
                   type='text'
                   className='form-control'
-                  placeholder='Descripcion del Cliente'
-                  name='description'
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                ></textarea>
+                  placeholder='Telefono del Cliente'
+                  name='phone'
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
               </div>
 
               <div className='form-group text-center'>
