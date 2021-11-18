@@ -11,13 +11,6 @@ const Header = () => {
           </Link>
         </h1>
       </div>
-
-      <Link
-        to={'/clients/new'}
-        className='btn btn-danger nuevo-post d-block d-md-inline-block'
-      >
-        Nuevo Cliente &#43;
-      </Link>
     </nav>
   );
 };
