@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 import Client from './Client';
 
 import { getAllClientsAction } from '../../store/actions/clientsActions';
@@ -25,6 +25,17 @@ const Clients = () => {
           Ocurrio un error.
         </p>
       ) : null}
+
+      <div className='row pb-2'>
+        <div className='col-12 text-right'>
+          <Link
+            to={'/clients/new'}
+            className='btn btn-danger nuevo-post d-block d-md-inline-block'
+          >
+            Nuevo Cliente &#43;
+          </Link>
+        </div>
+      </div>
 
       <table className='table table-striped'>
         <thead className='bg-primary table-dark'>
