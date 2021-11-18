@@ -13,8 +13,11 @@ import Dashboard from './components/Dashboard';
 import Clients from './components/Clients';
 import NewClient from './components/Clients/NewClient';
 import EditClient from './components/Clients/EditClient';
-// Components - Users branch
-// Components - Boilers branch
+// Components - Products branch
+// Components - Suppliers branch
+import Suppliers from './components/Suppliers';
+import NewSupplier from './components/Suppliers/NewClient';
+import EditSupplier from './components/Suppliers/EditClient';
 //
 
 function App() {
@@ -30,6 +33,9 @@ function App() {
               <Route exact path='/clients' component={Clients} />
               <Route exact path='/clients/new' component={NewClient} />
               <Route exact path='/clients/edit/:id' component={EditClient} />
+              <Route exact path='/suppliers' component={Suppliers} />
+              <Route exact path='/suppliers/new' component={NewSupplier} />
+              <Route exact path='/suppliers/edit/:id' component={EditSupplier} />
             </Switch>
           </div>
         </div>
