@@ -19,6 +19,10 @@ h1 a.text-light:hover {
   text-decoration: none !important;
 }
 
+.flex {
+  display: flex;
+}
+
 .new-post {
   font-weight: bold;
   text-transform: uppercase;
@@ -55,8 +59,4 @@ h1 a.text-light:hover {
 
 .actions > * {
   flex: 1;
-}
-
-.flex {
-  display: flex;
 }

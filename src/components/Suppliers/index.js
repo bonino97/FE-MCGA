@@ -6,28 +6,28 @@ import Supplier from './Supplier';
 import { getAllSuppliersAction } from '../../store/actions/suppliersActions';
 
 const Suppliers = () => {
-    const dispatch = useDispatch();
-  
-    useEffect(() => {
-      const getAllSuppliers = () => dispatch(getAllSuppliersAction());
-      getAllSuppliers();
-    }, []);
-  
-    const { loading, error, suppliers } = useSelector((state) => state.suppliers);
-  
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const getAllSuppliers = () => dispatch(getAllSuppliersAction());
+    getAllSuppliers();
+  }, []);
+
+  const { loading, error, suppliers } = useSelector((state) => state.suppliers);
+
   return (
     <div>
       <>
         <h2 className='text-center my-5'>Listado de Proveedores</h2>
-      {loading ? <h4 className='text-center'> Loading... </h4> : null}
+        {loading ? <h4 className='text-center'> Loading... </h4> : null}
 
-      {error ? (
-        <p className='alert alert-danger p-2 m-4 text-center'>
-          Ocurrio un error.
-        </p>
-      ) : null}
+        {error ? (
+          <p className='alert alert-danger p-2 m-4 text-center'>
+            Ocurrio un error.
+          </p>
+        ) : null}
 
-      <div className='row pb-2'>
+        <div className='row pb-2'>
           <div className='col-12 text-right'>
             <Link
               to={'/suppliers/new'}
@@ -48,11 +48,11 @@ const Suppliers = () => {
             </tr>
           </thead>
           <tbody>
-          {suppliers.length === 0
-            ? 'No hay Proveedores para mostrar'
-            : suppliers.map((supplier) => (
-                <Supplier key={supplier._id} supplier={supplier} />
-              ))}
+            {suppliers.length === 0
+              ? 'No hay Proveedores para mostrar'
+              : suppliers.map((supplier) => (
+                  <Supplier key={supplier._id} supplier={supplier} />
+                ))}
           </tbody>
         </table>
       </>
