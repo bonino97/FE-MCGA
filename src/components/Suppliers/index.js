@@ -31,6 +31,7 @@ const Suppliers = () => {
     setShowNewSupplier(!showNewSupplier);
   };
 
+
   return (
     <div>
       <>
@@ -60,7 +61,6 @@ const Suppliers = () => {
             </button>
           </div>
         </div>
-        {showNewSupplier && <NewSupplier />}
 
         <table className='table table-striped'>
           <thead className='bg-primary table-dark'>
