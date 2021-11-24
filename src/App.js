@@ -31,7 +31,7 @@ function App() {
       <Provider store={store}>
         <div className='flex'>
           <Sidebar />
-          <div className='container'>
+          <div className='mainOptions'>
             <Switch>
               <Route exact path='/' component={Dashboard} />
               <Route exact path='/clients' component={Clients} />

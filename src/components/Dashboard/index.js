@@ -29,7 +29,7 @@ const Dashboard = () => {
               </div>
               <div className='col-4'>
                 <Link
-                  to={'/Suppliers'}
+                  to={'/suppliers'}
                   className='btn btn-danger nuevo-post d-block d-md-inline-block'
                 >
                   Lista de Proveedores
