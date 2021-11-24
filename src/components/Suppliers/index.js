@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { Modal } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Supplier from './Supplier';
 import NewSupplier from './NewSupplier';
@@ -7,8 +9,31 @@ import NewSupplier from './NewSupplier';
 import { getAllSuppliersAction } from '../../store/actions/suppliersActions';
 import { addNewSupplierAction } from '../../store/actions/suppliersActions';
 
+const useStyles = makeStyles((theme) => ({
+    modal: {
+        position: 'absolute',
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadows: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)'
+    },
+    iconos:{
+        cursor: 'pointer'
+    },
+    inputMaterial:{
+        width: '100%'
+    }
+}))
+
 const Suppliers = () => {
   const [showNewSupplier, setShowNewSupplier] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
+  const styles=useStyles();
 
   const dispatch = useDispatch();
 
@@ -24,6 +49,7 @@ const Suppliers = () => {
 
   const addSupplier = (supplier) => {
     addNewSupplier(supplier);
+    openCloseModal();
   };
 
   // onClick function to set showNewSupplier
@@ -31,6 +57,9 @@ const Suppliers = () => {
     setShowNewSupplier(!showNewSupplier);
   };
 
+  const openCloseModal = () => {
+    setShowModal(!showModal);
+  };
 
   return (
     <div>
@@ -44,23 +73,10 @@ const Suppliers = () => {
           </p>
         ) : null}
 
-        {showNewSupplier && <NewSupplier onAdd={addSupplier} />}
-        <div className='row pb-2'>
-          <div className='col-12 text-center'>
-            <button
-              className={
-                showNewSupplier
-                  ? 'btn btn-danger nuevo-post d-block d-md-inline-block'
-                  : 'btn btn-primary m-1'
-              }
-              onClick={onClick}
-            >
-              {showNewSupplier
-                ? 'Cancelar Agregar Proveedor'
-                : 'Agregar Proveedor'}
-            </button>
-          </div>
-        </div>
+        <button className='btn btn-primary m-1' onClick={openCloseModal} >Agregar Proveedor (MODAL)</button>
+        <Modal open={showModal} onClose={openCloseModal}>
+          <NewSupplier onAdd={addSupplier} />
+        </Modal>
 
         <table className='table table-striped'>
           <thead className='bg-primary table-dark'>
