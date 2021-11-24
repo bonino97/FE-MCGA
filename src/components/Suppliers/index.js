@@ -1,11 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 import Supplier from './Supplier';
+import NewSupplier from './NewSupplier';
 
 import { getAllSuppliersAction } from '../../store/actions/suppliersActions';
+import { addNewSupplierAction } from '../../store/actions/suppliersActions';
 
 const Suppliers = () => {
+  const [showNewSupplier, setShowNewSupplier] = useState(false);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,6 +18,18 @@ const Suppliers = () => {
   }, []);
 
   const { loading, error, suppliers } = useSelector((state) => state.suppliers);
+
+  // Llama el action.
+  const addNewSupplier = (supplier) => dispatch(addNewSupplierAction(supplier));
+
+  const addSupplier = (supplier) => {
+    addNewSupplier(supplier);
+  };
+
+  // onClick function to set showNewSupplier
+  const onClick = () => {
+    setShowNewSupplier(!showNewSupplier);
+  };
 
   return (
     <div>
@@ -27,16 +43,24 @@ const Suppliers = () => {
           </p>
         ) : null}
 
+        {showNewSupplier && <NewSupplier onAdd={addSupplier} />}
         <div className='row pb-2'>
-          <div className='col-12 text-right'>
-            <Link
-              to={'/suppliers/new'}
-              className='btn btn-danger nuevo-post d-block d-md-inline-block'
+          <div className='col-12 text-center'>
+            <button
+              className={
+                showNewSupplier
+                  ? 'btn btn-danger nuevo-post d-block d-md-inline-block'
+                  : 'btn btn-primary m-1'
+              }
+              onClick={onClick}
             >
-              Nuevo Proveedor &#43;
-            </Link>
+              {showNewSupplier
+                ? 'Cancelar Agregar Proveedor'
+                : 'Agregar Proveedor'}
+            </button>
           </div>
         </div>
+        {showNewSupplier && <NewSupplier />}
 
         <table className='table table-striped'>
           <thead className='bg-primary table-dark'>
