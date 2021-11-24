@@ -22,7 +22,7 @@ export function addNewSupplierAction(supplier) {
   return async (dispatch) => {
     dispatch(addNewSupplier());
     try {
-      // Primero intenta cargar un suppliere. Cargando = True.
+      // Primero intenta cargar un proveedor. Cargando = True.
       await axiosClient.post(`${supplierUrl}`, supplier);
       // Si lo agrega correctamente, dispara la accion con el objeto de suppliere cargado correctamente.
       dispatch(addNewSupplierSuccess(supplier));
