@@ -65,7 +65,7 @@ const EditProduct = () => {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Direccion del Cliente"
+                  placeholder="Precio del Producto"
                   name="price"
                   value={price}
                   onChange={onFormChange}
