@@ -51,7 +51,7 @@ npm start
 
 - Acceso a los métodos CRUD - MongoDB:
 
-![Dasboard](https://raw.githubusercontent.com/bonino97/FE-MCGA/products/assets/dashboard.png)
+![Dasboard](https://raw.githubusercontent.com/bonino97/FE-MCGA/products/src/assets/dashboard.png)
 
 1.  _Productos - Obtener todos los productos_
 
