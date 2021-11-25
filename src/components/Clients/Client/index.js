@@ -5,11 +5,11 @@ import Swal from 'sweetalert2';
 
 import {
   deleteClientAction,
-  editClientAction,
+  setClientAction,
 } from '../../../store/actions/clientsActions';
 
 const Client = ({ client }) => {
-  const { _id, name, address, category, description } = client;
+  const { _id, name, lastName, email, phone } = client;
 
   const dispatch = useDispatch();
   const history = useHistory(); // Habilitar history para redireccionar.
@@ -33,7 +33,7 @@ const Client = ({ client }) => {
   };
 
   const onEditRedirection = (id) => {
-    dispatch(editClientAction(client));
+    dispatch(setClientAction(client));
     history.push(`/clients/edit/${id}`);
   };
 
@@ -42,9 +42,9 @@ const Client = ({ client }) => {
       <td>
         <span className='font-weight-bold'> {name} </span>
       </td>
-      <td>{address}</td>
-      <td>{category}</td>
-      <td>{description}</td>
+      <td>{lastName}</td>
+      <td>{email}</td>
+      <td>{phone}</td>
       <td className='actions'>
         <button
           type='button'
