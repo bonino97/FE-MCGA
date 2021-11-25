@@ -8,6 +8,7 @@ import NewSupplier from './NewSupplier';
 
 import { getAllSuppliersAction } from '../../store/actions/suppliersActions';
 import { addNewSupplierAction } from '../../store/actions/suppliersActions';
+import { editSupplierAction } from '../../store/actions/suppliersActions';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -30,7 +31,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Suppliers = () => {
-  const [showNewSupplier, setShowNewSupplier] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
   const styles = useStyles();
@@ -50,11 +50,6 @@ const Suppliers = () => {
   const addSupplier = (supplier) => {
     addNewSupplier(supplier);
     openCloseModal();
-  };
-
-  // onClick function to set showNewSupplier
-  const onClick = () => {
-    setShowNewSupplier(!showNewSupplier);
   };
 
   const openCloseModal = () => {
