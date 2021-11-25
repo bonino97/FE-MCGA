@@ -13,14 +13,14 @@ ul {
 }
 
 li {
-  font-weight:500;
+  font-weight: 500;
   height: 25px;
   width: 100%;
   padding-left: 5px;
   margin-bottom: 1rem;
 }
 
-li:hover{
+li:hover {
   background-color: rgb(91, 55, 55);
 }
 

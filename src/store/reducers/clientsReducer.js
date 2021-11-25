@@ -11,6 +11,7 @@ import {
   EDIT_CLIENT,
   EDIT_CLIENT_SUCCESS,
   EDIT_CLIENT_ERROR,
+  SET_CLIENT,
 } from '../../types/clients';
 
 // Cada reducer tiene su propio State.
@@ -19,6 +20,7 @@ const initialState = {
   error: null,
   loading: false,
   client: null,
+  selectedClient: null,
 };
 
 export default function (state = initialState, action) {
@@ -95,7 +97,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        client: action.payload,
+        selectedClient: action.payload,
       };
 
     case EDIT_CLIENT_SUCCESS:
@@ -114,6 +116,13 @@ export default function (state = initialState, action) {
         loading: false,
         error: action.payload,
         // En este caso, el error pasa a true. (Para poder notificar al usuario)
+      };
+
+    case SET_CLIENT:
+      return {
+        ...state,
+        loading: false,
+        selectedClient: action.payload,
       };
     default:
       return state;

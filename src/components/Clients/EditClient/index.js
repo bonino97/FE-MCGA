@@ -1,37 +1,69 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { editClientAction } from '../../../store/actions/clientsActions';
 
 const EditClient = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
   const [clientState, setClient] = useState({
+    _id: '',
     name: '',
-    address: '',
-    category: '',
-    description: '',
+    lastName: '',
+    email: '',
+    phone: '',
   });
 
-  const { loading, error, client } = useSelector((state) => state.clients);
+  const { loading, error, selectedClient } = useSelector(
+    (state) => state?.clients
+  );
 
   useEffect(() => {
-    setClient(client);
-  }, [client]);
+    setClient(selectedClient);
+  }, [selectedClient]);
 
-  const { name, address, category, description } = clientState;
+  if (!clientState) return history.push('/');
+
+  console.log(clientState);
+
+  const { name, lastName, email, phone } = clientState;
 
   const onFormChange = (e) => {
+    console.log(e.target.value);
     setClient({
       ...clientState,
       [e.target.name]: e.target.value,
     });
   };
 
+  const editClient = (client) => dispatch(editClientAction(client));
+
   const onSubmit = (e) => {
     e.preventDefault();
 
-    console.log(e.target.value);
+    //Validar formulario.
+    if (
+      name.trim() === '' ||
+      lastName.trim() === '' ||
+      email.trim() === '' ||
+      phone.trim() === ''
+    )
+      return;
+
+    //Si no hay errores.
+    //Crear Cliente.
+    const client = {
+      _id: clientState._id,
+      name,
+      lastName,
+      email,
+      phone,
+    };
+
+    editClient(client);
+    // Redireccionar a la lista de clientes.
+    history.push('/clients');
   };
 
   return (
@@ -40,7 +72,7 @@ const EditClient = () => {
         <div className='card'>
           <div className='card-body'>
             <h2 className='text-center mb-4 font-weight-bold'>
-              Editar Producto
+              Editar Cliente
             </h2>
 
             <form onSubmit={onSubmit}>
@@ -60,42 +92,44 @@ const EditClient = () => {
 
               <div className='form-group'>
                 <label>
-                  Direccion Cliente <span className='text-danger'>*</span>
+                  Apellido Cliente <span className='text-danger'>*</span>
                 </label>
                 <input
                   type='text'
                   className='form-control'
-                  placeholder='Direccion del Cliente'
-                  name='address'
-                  value={address}
+                  placeholder='Apellido del Cliente'
+                  name='lastName'
+                  value={lastName}
                   onChange={onFormChange}
                 />
               </div>
 
               <div className='form-group'>
                 <label>
-                  Categoria Cliente <span className='text-danger'>*</span>
+                  Email Cliente <span className='text-danger'>*</span>
                 </label>
                 <input
                   type='text'
                   className='form-control'
-                  placeholder='Categoria del Cliente'
-                  name='category'
-                  value={category}
+                  placeholder='Email del Cliente'
+                  name='email'
+                  value={email}
                   onChange={onFormChange}
                 />
               </div>
 
               <div className='form-group'>
-                <label>Descripcion Cliente</label>
-                <textarea
+                <label>
+                  Telefono Cliente <span className='text-danger'>*</span>
+                </label>
+                <input
                   type='text'
                   className='form-control'
-                  placeholder='Descripcion del Cliente'
-                  name='description'
-                  value={description}
+                  placeholder='Telefono del Cliente'
+                  name='phone'
+                  value={phone}
                   onChange={onFormChange}
-                ></textarea>
+                />
               </div>
 
               <div className='form-group text-center'>

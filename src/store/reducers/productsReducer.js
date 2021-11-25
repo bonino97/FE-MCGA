@@ -11,7 +11,8 @@ import {
   EDIT_PRODUCT,
   EDIT_PRODUCT_SUCCESS,
   EDIT_PRODUCT_ERROR,
-} from "../../types/products";
+  SET_PRODUCT,
+} from '../../types/products';
 
 // Cada reducer tiene su propio State.
 const initialState = {
@@ -19,6 +20,7 @@ const initialState = {
   error: null,
   loading: false,
   product: null,
+  selectedProduct: null,
 };
 
 export default function (state = initialState, action) {
@@ -114,6 +116,12 @@ export default function (state = initialState, action) {
         loading: false,
         error: action.payload,
         // En este caso, el error pasa a true. (Para poder notificar al usuario)
+      };
+    case SET_PRODUCT:
+      return {
+        ...state,
+        loading: false,
+        selectedProduct: action.payload,
       };
     default:
       return state;

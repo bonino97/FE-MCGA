@@ -13,6 +13,7 @@ import {
   GET_CLIENTS,
   GET_CLIENTS_SUCCESS,
   GET_CLIENTS_ERROR,
+  SET_CLIENT,
 } from '../../types/clients';
 
 const clientUrl = '/client';
@@ -128,14 +129,26 @@ const deleteClientError = (status) => ({
 // Editar Cliente.
 export const editClientAction = (client) => {
   return async (dispatch) => {
-    dispatch(editClient(client));
+    try {
+      // Primero intenta cargar un cliente. Cargando = True.
+      await axiosClient.put(`${clientUrl}/${client?._id}`, client);
+      // Si lo agrega correctamente, dispara la accion con el objeto de cliente cargado correctamente.
+      dispatch(editClientSuccess(client));
+      dispatch(getAllClientsAction());
+      // Alerta exitosa.
+      Swal.fire('Correcto', 'El cliente se edito correctamente...', 'success');
+    } catch (error) {
+      // Si falla, envia una notificacion de error.
+      dispatch(editClientError(true));
+      // Alerta de error.
+      Swal.fire({
+        icon: 'error',
+        title: 'Ocurrio un error.',
+        text: 'Ocurrio un error, intenta de nuevo.',
+      });
+    }
   };
 };
-
-const editClient = (client) => ({
-  type: EDIT_CLIENT,
-  payload: client,
-});
 
 const editClientSuccess = (client) => ({
   type: EDIT_CLIENT_SUCCESS,
@@ -145,4 +158,15 @@ const editClientSuccess = (client) => ({
 const editClientError = (status) => ({
   type: EDIT_CLIENT_ERROR,
   payload: status,
+});
+
+export const setClientAction = (client) => {
+  return async (dispatch) => {
+    dispatch(setClient(client));
+  };
+};
+
+const setClient = (client) => ({
+  type: SET_CLIENT,
+  payload: client,
 });
