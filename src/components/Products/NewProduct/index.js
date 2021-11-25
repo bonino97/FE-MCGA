@@ -24,7 +24,7 @@ const NewProduct = ({ history }) => {
     //Validar formulario
     if (
       name.trim() === "" ||
-      price.trim() === "" ||
+      price === "" ||
       detail.trim() === "" ||
       category.trim() === ""
     )

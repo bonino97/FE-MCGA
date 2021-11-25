@@ -2,8 +2,34 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import Product from "./Product";
+import NewProduct from "./NewProduct";
+
+import { Modal } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { getAllProductsAction } from "../../store/actions/productsActions";
+import { addNewProductsAction } from "../../store/actions/productsActions";
+
+//
+const useStyles = makeStyles((theme) => ({
+  modal: {
+    position: "absolute",
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadows: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+  },
+  iconos: {
+    cursor: "pointer",
+  },
+  inputMaterial: {
+    width: "100%",
+  },
+}));
 
 const Products = () => {
   const dispatch = useDispatch();

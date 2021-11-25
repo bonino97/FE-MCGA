@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import {
   deleteProductAction,
   editProductAction,
+  setProductAction,
 } from "../../../store/actions/productsActions";
 
 const Product = ({ product }) => {
@@ -33,7 +34,7 @@ const Product = ({ product }) => {
   };
 
   const onEditRedirection = (id) => {
-    dispatch(editProductAction(product));
+    dispatch(setProductAction(product));
     history.push(`/products/edit/${id}`);
   };
 

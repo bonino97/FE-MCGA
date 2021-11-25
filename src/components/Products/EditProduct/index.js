@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { editProductAction } from "../../../store/actions/productsActions";
 
 const EditProduct = () => {
   const history = useHistory();
   const dispatch = useDispatch();
 
   const [productState, setProduct] = useState({
+    _id: "",
     name: "",
     price: "",
     detail: "",
     category: "",
   });
 
-  const { loading, error, product } = useSelector((state) => state.products);
+  const { loading, error, selectedProduct } = useSelector(
+    (state) => state?.products
+  );
 
   useEffect(() => {
-    setProduct(product);
-  }, [product]);
+    setProduct(selectedProduct);
+  }, [selectedProduct]);
+
+  if (!productState) return history.push("/");
+  console.log(productState);
 
   const { name, price, detail, category } = productState;
 
@@ -28,10 +35,34 @@ const EditProduct = () => {
     });
   };
 
+  const editProduct = (product) => dispatch(editProductAction(product));
+
   const onSubmit = (e) => {
     e.preventDefault();
-
     console.log(e.target.value);
+
+    // Validar el Formulario
+    if (
+      name.trim() === "" ||
+      price === "" ||
+      detail.trim() === "" ||
+      category.trim() === ""
+    )
+      return;
+
+    //Si no hay errores
+    // Crea Producto
+    const product = {
+      _id: productState._id,
+      name,
+      price,
+      detail,
+      category,
+    };
+
+    editProduct(product);
+    // Redireccionar a la lista de los productos
+    history.push("/products");
   };
 
   return (
