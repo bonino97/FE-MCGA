@@ -129,6 +129,25 @@ const deleteClientError = (status) => ({
 export const editClientAction = (client) => {
   return async (dispatch) => {
     dispatch(editClient(client));
+    try {
+      // Primero intenta cargar un cliente. Cargando = True.
+      await axiosClient.put(`${clientUrl}`, client);
+      // Si lo agrega correctamente, dispara la accion con el objeto de cliente cargado correctamente.
+      dispatch(editClientSuccess(client));
+
+      // Alerta exitosa.
+      Swal.fire('Correcto', 'El cliente se edito correctamente...', 'success');
+    } catch (error) {
+      console.error(error);
+      // Si falla, envia una notificacion de error.
+      dispatch(editClientError(true));
+      // Alerta de error.
+      Swal.fire({
+        icon: 'error',
+        title: 'Ocurrio un error.',
+        text: 'Ocurrio un error, intenta de nuevo.',
+      });
+    }
   };
 };
 
