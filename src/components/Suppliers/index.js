@@ -33,8 +33,6 @@ const useStyles = makeStyles((theme) => ({
 const Suppliers = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const styles = useStyles();
-
   const dispatch = useDispatch();
 
   useEffect(() => {

@@ -10,7 +10,6 @@ const EditSupplier = () => {
   const [supplierState, setSupplier] = useState({
     _id: '',
     name: '',
-    lastName: '',
     email: '',
     phone: '',
   });
@@ -27,7 +26,7 @@ const EditSupplier = () => {
 
   console.log(supplierState);
 
-  const { name, lastName, email, phone } = supplierState;
+  const { name, email, phone } = supplierState;
 
   const onFormChange = (e) => {
     console.log(e.target.value);
@@ -45,7 +44,6 @@ const EditSupplier = () => {
     //Validar formulario.
     if (
       name.trim() === '' ||
-      lastName.trim() === '' ||
       email.trim() === '' ||
       phone.trim() === ''
     )
@@ -56,7 +54,6 @@ const EditSupplier = () => {
     const supplier = {
       _id: supplierState._id,
       name,
-      lastName,
       email,
       phone,
     };
@@ -86,20 +83,6 @@ const EditSupplier = () => {
                   placeholder='Nombre del Proveedor'
                   name='name'
                   value={name}
-                  onChange={onFormChange}
-                />
-              </div>
-
-              <div className='form-group'>
-                <label>
-                  Apellido Proveedor <span className='text-danger'>*</span>
-                </label>
-                <input
-                  type='text'
-                  className='form-control'
-                  placeholder='Apellido del Proveedor'
-                  name='lastName'
-                  value={lastName}
                   onChange={onFormChange}
                 />
               </div>

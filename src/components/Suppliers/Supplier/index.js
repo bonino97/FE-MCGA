@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 import {
   deleteSupplierAction,
-  editSupplierAction,
+  setSupplierAction,
 } from '../../../store/actions/suppliersActions';
 
 const Supplier = ({ supplier }) => {
@@ -33,7 +33,7 @@ const Supplier = ({ supplier }) => {
   };
 
   const onEditRedirection = (id) => {
-    dispatch(editSupplierAction(supplier));
+    dispatch(setSupplierAction(supplier));
     history.push(`/suppliers/edit/${id}`);
   };
 
