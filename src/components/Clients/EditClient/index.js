@@ -8,21 +8,29 @@ const EditClient = () => {
   const dispatch = useDispatch();
 
   const [clientState, setClient] = useState({
+    _id: '',
     name: '',
     lastName: '',
     email: '',
     phone: '',
   });
 
-  const { loading, error, client } = useSelector((state) => state.clients);
+  const { loading, error, selectedClient } = useSelector(
+    (state) => state?.clients
+  );
 
   useEffect(() => {
-    setClient(client);
-  }, [client]);
+    setClient(selectedClient);
+  }, [selectedClient]);
+
+  if (!clientState) return history.push('/');
+
+  console.log(clientState);
 
   const { name, lastName, email, phone } = clientState;
 
   const onFormChange = (e) => {
+    console.log(e.target.value);
     setClient({
       ...clientState,
       [e.target.name]: e.target.value,
@@ -33,6 +41,7 @@ const EditClient = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
     //Validar formulario.
     if (
       name.trim() === '' ||
@@ -45,6 +54,7 @@ const EditClient = () => {
     //Si no hay errores.
     //Crear Cliente.
     const client = {
+      _id: clientState._id,
       name,
       lastName,
       email,
@@ -52,7 +62,6 @@ const EditClient = () => {
     };
 
     editClient(client);
-
     // Redireccionar a la lista de clientes.
     history.push('/clients');
   };
