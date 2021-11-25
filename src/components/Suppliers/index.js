@@ -5,10 +5,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import Supplier from './Supplier';
 import NewSupplier from './NewSupplier';
+import NewSupplierForm from './NewSupplier/NewSupplierForm';
 
 import { getAllSuppliersAction } from '../../store/actions/suppliersActions';
 import { addNewSupplierAction } from '../../store/actions/suppliersActions';
-import { editSupplierAction } from '../../store/actions/suppliersActions';
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -66,13 +66,21 @@ const Suppliers = () => {
           </p>
         ) : null}
 
-        <div className='col-12 text-center'>
-          <button className='btn btn-primary m-1' onClick={openCloseModal}>
-            Agregar Proveedor (MODAL)
-          </button>
-          <Modal open={showModal} onClose={openCloseModal}>
-            <NewSupplier onAdd={addSupplier} />
-          </Modal>
+        <div className='row pb-2'>
+          <div className='col-12 text-center'>
+            <button className='btn btn-primary m-1' onClick={openCloseModal}>
+              Agregar Proveedor
+            </button>
+            <Modal open={showModal} onClose={openCloseModal}>
+              <NewSupplier onAdd={addSupplier} />
+            </Modal>
+            <button className='btn btn-primary m-1' onClick={openCloseModal}>
+              Agregar Proveedor (Final Forms)
+            </button>
+            <Modal open={showModal} onClose={openCloseModal}>
+              <NewSupplierForm onAdd={addSupplier} />
+            </Modal>
+          </div>
         </div>
 
         <table className='table table-striped'>

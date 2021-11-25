@@ -42,12 +42,12 @@ const EditSupplier = () => {
     e.preventDefault();
 
     //Validar formulario.
-    if (
-      name.trim() === '' ||
-      email.trim() === '' ||
-      phone.trim() === ''
-    )
-      return;
+    // if (
+    //   name.trim() === '' ||
+    //   email.trim() === '' ||
+    //   phone.trim() === ''
+    // )
+    //   return;
 
     //Si no hay errores.
     //Crear Proveedor.
@@ -125,7 +125,7 @@ const EditSupplier = () => {
                 type='submit'
                 className='btn btn-primary font-weight-bold text-uppercase d-block w-100'
               >
-                Agregar
+                Guardar cambios
               </button>
             </form>
             {loading ? <p> Loading... </p> : null}
