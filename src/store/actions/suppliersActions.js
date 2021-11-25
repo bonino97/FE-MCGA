@@ -13,6 +13,7 @@ import {
   GET_SUPPLIERS,
   GET_SUPPLIERS_SUCCESS,
   GET_SUPPLIERS_ERROR,
+  SET_SUPPLIER,
 } from '../../types/suppliers';
 
 const supplierUrl = '/supplier';
@@ -28,7 +29,11 @@ export function addNewSupplierAction(supplier) {
       dispatch(addNewSupplierSuccess(supplier));
 
       // Alerta exitosa.
-      Swal.fire('Correcto', 'El suppliere se agrego correctamente...', 'success');
+      Swal.fire(
+        'Correcto',
+        'El suppliere se agrego correctamente...',
+        'success'
+      );
     } catch (error) {
       console.error(error);
       // Si falla, envia una notificacion de error.
@@ -125,17 +130,33 @@ const deleteSupplierError = (status) => ({
   payload: status,
 });
 
-// Editar Suppliere.
+// Editar proveedor.
 export const editSupplierAction = (supplier) => {
   return async (dispatch) => {
-    dispatch(editSupplier(supplier));
+    try {
+      // Primero intenta cargar un proveedor. Cargando = True.
+      await axiosClient.put(`${supplierUrl}/${supplier?._id}`, supplier);
+      // Si lo agrega correctamente, dispara la accion con el objeto de suppliere cargado correctamente.
+      dispatch(editSupplierSuccess(supplier));
+      dispatch(getAllSuppliersAction());
+      // Alerta exitosa.
+      Swal.fire(
+        'Correcto',
+        'El proveedor se edito correctamente...',
+        'success'
+      );
+    } catch (error) {
+      // Si falla, envia una notificacion de error.
+      dispatch(editSupplierError(true));
+      // Alerta de error.
+      Swal.fire({
+        icon: 'error',
+        title: 'Ocurrio un error.',
+        text: 'Ocurrio un error, intenta de nuevo.',
+      });
+    }
   };
 };
-
-const editSupplier = (supplier) => ({
-  type: EDIT_SUPPLIER,
-  payload: supplier,
-});
 
 const editSupplierSuccess = (supplier) => ({
   type: EDIT_SUPPLIER_SUCCESS,
@@ -145,4 +166,15 @@ const editSupplierSuccess = (supplier) => ({
 const editSupplierError = (status) => ({
   type: EDIT_SUPPLIER_ERROR,
   payload: status,
+});
+
+export const setSupplierAction = (supplier) => {
+  return async (dispatch) => {
+    dispatch(setSupplier(supplier));
+  };
+};
+
+const setSupplier = (supplier) => ({
+  type: SET_SUPPLIER,
+  payload: supplier,
 });

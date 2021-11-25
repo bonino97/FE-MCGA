@@ -1,5 +1,5 @@
-import Swal from "sweetalert2";
-import axiosClient from "../../config/axios";
+import Swal from 'sweetalert2';
+import axiosClient from '../../config/axios';
 import {
   ADD_PRODUCT,
   ADD_PRODUCT_SUCCESS,
@@ -13,9 +13,10 @@ import {
   GET_PRODUCTS,
   GET_PRODUCTS_SUCCESS,
   GET_PRODUCTS_ERROR,
-} from "../../types/products.js";
+  SET_PRODUCT,
+} from '../../types/products.js';
 
-const productUrl = "/product";
+const productUrl = '/product';
 
 // Obtener todos los Productos
 export function getAllProductsAction() {
@@ -57,9 +58,9 @@ export function addNewProductAction(product) {
 
       // Alerta exitosa.
       Swal.fire(
-        "Correcto",
-        "El Producto se agrego correctamente...",
-        "success"
+        'Correcto',
+        'El Producto se agrego correctamente...',
+        'success'
       );
     } catch (error) {
       console.error(error);
@@ -67,9 +68,9 @@ export function addNewProductAction(product) {
       dispatch(addNewProductError(true));
       // Alerta de error.
       Swal.fire({
-        icon: "error",
-        title: "Ocurrio un error.",
-        text: "Ocurrio un error, intenta de nuevo.",
+        icon: 'error',
+        title: 'Ocurrio un error.',
+        text: 'Ocurrio un error, intenta de nuevo.',
       });
     }
   };
@@ -99,17 +100,17 @@ export const deleteProductAction = (id) => {
       await axiosClient.delete(`${productUrl}/${id}`);
       dispatch(deleteProductSuccess(id));
       Swal.fire(
-        "Eliminado",
-        "El Producto se elimino correctamente...",
-        "success"
+        'Eliminado',
+        'El Producto se elimino correctamente...',
+        'success'
       );
     } catch (error) {
       console.error(error);
       dispatch(deleteProductError(true));
       Swal.fire({
-        icon: "error",
-        title: "Ocurrio un error.",
-        text: "Ocurrio un error al eliminar el Producto, intenta de nuevo.",
+        icon: 'error',
+        title: 'Ocurrio un error.',
+        text: 'Ocurrio un error al eliminar el Producto, intenta de nuevo.',
       });
     }
   };
@@ -129,24 +130,47 @@ const deleteProductError = (status) => ({
   payload: status,
 });
 
-// Actualizar Producto
+// Editar producto.
 export const editProductAction = (product) => {
   return async (dispatch) => {
-    dispatch(editProduct(product));
+    try {
+      // Primero intenta cargar un producto. Cargando = True.
+      await axiosClient.put(`${productUrl}/${product?._id}`, product);
+      // Si lo agrega correctamente, dispara la accion con el objeto de producte cargado correctamente.
+      dispatch(editProductSuccess(product));
+      dispatch(getAllProductsAction());
+      // Alerta exitosa.
+      Swal.fire('Correcto', 'El producto se edito correctamente...', 'success');
+    } catch (error) {
+      // Si falla, envia una notificacion de error.
+      dispatch(editProductError(true));
+      // Alerta de error.
+      Swal.fire({
+        icon: 'error',
+        title: 'Ocurrio un error.',
+        text: 'Ocurrio un error, intenta de nuevo.',
+      });
+    }
   };
 };
-
-const editProduct = (product) => ({
-  type: EDIT_PRODUCT,
-  payload: product,
-});
 
 const editProductSuccess = (product) => ({
   type: EDIT_PRODUCT_SUCCESS,
   payload: product,
 });
 
-const editProducttError = (status) => ({
+const editProductError = (status) => ({
   type: EDIT_PRODUCT_ERROR,
   payload: status,
+});
+
+export const setProductAction = (product) => {
+  return async (dispatch) => {
+    dispatch(setProduct(product));
+  };
+};
+
+const setProduct = (product) => ({
+  type: SET_PRODUCT,
+  payload: product,
 });
