@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Suppliers = () => {
   const [showModal, setShowModal] = useState(false);
+  const [showModalFF, setShowModalFF] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -45,13 +46,26 @@ const Suppliers = () => {
   // Llama el action.
   const addNewSupplier = (supplier) => dispatch(addNewSupplierAction(supplier));
 
+  //crea nuevo supplier para formulario hecho con react form
   const addSupplier = (supplier) => {
     addNewSupplier(supplier);
     openCloseModal();
   };
 
+  //modal para formulario hecho con react form
   const openCloseModal = () => {
     setShowModal(!showModal);
+  };
+
+  //crea nuevo supplier para formulario hecho con final forms
+  const addSupplierFF = (supplier) => {
+    addNewSupplier(supplier);
+    openCloseModalFF();
+  };
+
+  //modal para formulario hecho con final forms
+  const openCloseModalFF = () => {
+    setShowModalFF(!showModalFF);
   };
 
   return (
@@ -69,16 +83,16 @@ const Suppliers = () => {
         <div className='row pb-2'>
           <div className='col-12 text-center'>
             <button className='btn btn-primary m-1' onClick={openCloseModal}>
-              Agregar Proveedor
+              Agregar Proveedor (React Forms)
             </button>
             <Modal open={showModal} onClose={openCloseModal}>
               <NewSupplier onAdd={addSupplier} />
             </Modal>
-            <button className='btn btn-primary m-1' onClick={openCloseModal}>
+            <button className='btn btn-primary m-1' onClick={openCloseModalFF}>
               Agregar Proveedor (Final Forms)
             </button>
-            <Modal open={showModal} onClose={openCloseModal}>
-              <NewSupplierForm onAdd={addSupplier} />
+            <Modal open={showModalFF} onClose={openCloseModalFF}>
+              <NewSupplierForm onAdd={addSupplierFF} />
             </Modal>
           </div>
         </div>
