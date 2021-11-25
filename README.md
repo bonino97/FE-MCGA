@@ -53,6 +53,10 @@ npm start
 
 ![Dasboard](https://raw.githubusercontent.com/bonino97/FE-MCGA/products/src/assets/dashboard.png)
 
+![List Products](https://raw.githubusercontent.com/bonino97/FE-MCGA/products/src/assets/products.png)
+
+![Add Product](https://raw.githubusercontent.com/bonino97/FE-MCGA/products/src/assets/addProduct.png)
+
 1.  _Productos - Obtener todos los productos_
 
 `addProduct` -> _Productos - Agregar producto_ 2. `updateProduct` -> _Productos - Actualizar datos del producto_ 3. `deleteProduct` -> _Productos - Borrar producto por el Id_ 4. 5. `getProductById` -> _Productos - Obtener un producto por el Id_ 6. `getProductByCategory` -> _Productos - Obtener productos por Categoría_
