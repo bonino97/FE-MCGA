@@ -10,30 +10,30 @@ import { getAllSuppliersAction } from '../../store/actions/suppliersActions';
 import { addNewSupplierAction } from '../../store/actions/suppliersActions';
 
 const useStyles = makeStyles((theme) => ({
-    modal: {
-        position: 'absolute',
-        width: 400,
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadows: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)'
-    },
-    iconos:{
-        cursor: 'pointer'
-    },
-    inputMaterial:{
-        width: '100%'
-    }
-}))
+  modal: {
+    position: 'absolute',
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    boxShadows: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+  },
+  iconos: {
+    cursor: 'pointer',
+  },
+  inputMaterial: {
+    width: '100%',
+  },
+}));
 
 const Suppliers = () => {
   const [showNewSupplier, setShowNewSupplier] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const styles=useStyles();
+  const styles = useStyles();
 
   const dispatch = useDispatch();
 
@@ -73,10 +73,14 @@ const Suppliers = () => {
           </p>
         ) : null}
 
-        <button className='btn btn-primary m-1' onClick={openCloseModal} >Agregar Proveedor (MODAL)</button>
-        <Modal open={showModal} onClose={openCloseModal}>
-          <NewSupplier onAdd={addSupplier} />
-        </Modal>
+        <div className='col-12 text-center'>
+          <button className='btn btn-primary m-1' onClick={openCloseModal}>
+            Agregar Proveedor (MODAL)
+          </button>
+          <Modal open={showModal} onClose={openCloseModal}>
+            <NewSupplier onAdd={addSupplier} />
+          </Modal>
+        </div>
 
         <table className='table table-striped'>
           <thead className='bg-primary table-dark'>
